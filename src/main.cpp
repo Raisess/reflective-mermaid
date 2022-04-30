@@ -1,16 +1,12 @@
-#include <iostream>
+#include "Lexer.h"
 
 int main(int argc, char* argv[]) {
-  std::cout << "Hello, world!" << std::endl;
+  std::string str = "string test = 'hello'\nint x = 1\nint y = 1\nx + y\n";
 
-  argc = argc - 1;
+  std::vector<Token> tokens = Lexer::tokenizer(str);
 
-  if (argc >= 1) {
-    std::cout << "arguments: " << argc << std::endl;
-
-    for (int i = 1; i <= argc; i++) {
-      std::cout << "argument " << i - 1 << ": " << argv[i] << std::endl;
-    }
+  for (int i = 0; i < tokens.size(); i++) {
+    std::cout << i << ": (" << tokens[i].type << ") " << tokens[i].value << std::endl;
   }
 
   return 0;

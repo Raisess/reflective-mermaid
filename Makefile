@@ -1,7 +1,8 @@
 CC=g++
 
 SRC_DIR=./src
-INPUT=$(SRC_DIR)/main.cpp
+INPUT=$(SRC_DIR)/main.cpp \
+			$(SRC_DIR)/Lexer.cpp
 
 BUILD_DIR=./build
 OUTPUT=$(BUILD_DIR)/refmermaid
