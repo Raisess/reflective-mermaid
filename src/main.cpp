@@ -1,7 +1,11 @@
 #include "Lexer.h"
 
 int main(int argc, char* argv[]) {
-  std::string str = "string test = 'hello'\nint x = 1\nint y = 1\nx + y\n";
+  std::string str = 
+    "model Test {\n"
+    " id Int @db.Int @id @unique @default(autoincrement())\n"
+    " name String @db.VarChar(36)\n"
+    "}\n";
 
   std::vector<Token> tokens = Lexer::tokenizer(str);
 
