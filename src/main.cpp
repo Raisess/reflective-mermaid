@@ -2,10 +2,19 @@
 
 int main(int argc, char* argv[]) {
   std::string str = 
-    "model Test {\n"
+    "model User {\n"
     " id Int @db.Int @id @unique @default(autoincrement())\n"
     " name String @db.VarChar(36)\n"
-    "}\n";
+    " role_id Int"
+    " role Role @relation(fields: [role_id], references: [id], name: \"user_role\")\n"
+    "}"
+    "model Role {\n"
+    " id Int @db.Int @id @unique @default(autoincrement())\n"
+    " role_name String @db.VarChar(50)\n"
+    "}";
+
+  std::cout << str << std::endl;
+  std::cout << "\n============================================\n" << std::endl;
 
   std::vector<Token> tokens = Lexer::tokenizer(str);
 

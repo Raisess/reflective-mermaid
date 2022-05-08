@@ -22,14 +22,19 @@ std::string Lexer::match(std::string str) {
     { "NativeType", "@db.[A-Za-z]+" },
     { "Flag", "@[a-z]+" },
     { "Symbol", "[A-Za-z]+" },
+    { "Symbol", "[A-Za-z]+_[A-Za-z]+" },
     { "Number", "\\d+" },
     { "String", "'(.*?)'" },
     { "String", "\"(.*?)\"" },
     { "Operator", "[-+*/=]" },
-    { "LC", "[{]" },
-    { "RC", "[}]" },
-    { "LP", "[(]" },
-    { "RP", "[)]" },
+    { "TwoPoints", "[:]" },
+    { "LeftCurly", "[{]" },
+    { "RightCurly", "[}]" },
+    { "LeftParen", "[(]" },
+    { "RightParen", "[)]" },
+    { "LeftTest", "[\[]" },
+    { "RightTest", "[\\]]" },
+    { "Comma", "[,]" },
   };
 
   for (int i = 0; i < valid_matches.size(); i++) {
@@ -49,7 +54,7 @@ std::vector<std::string> Lexer::split_str(std::string str) {
   for (int i = 0; i < str.length(); i++) {
     std::string curr_char = str.substr(i, 1);
 
-    if (std::regex_match(curr_char, std::regex("[(){}]"))) {
+    if (std::regex_match(curr_char, std::regex("[(){}:,\[\\]]"))) {
       if (tmp_word != "") {
         str_vec.push_back(tmp_word);
         tmp_word = "";
