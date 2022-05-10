@@ -43,7 +43,7 @@ std::string Lexer::match(std::string str) {
     }
   }
 
-  std::cout << "Error: Invalid entry " << str << std::endl;
+  std::cout << "Error: Invalid token " << str << std::endl;
   exit(1);
 }
 
