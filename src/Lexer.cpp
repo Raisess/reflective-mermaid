@@ -62,7 +62,7 @@ std::vector<std::string> Lexer::split_str(std::string str) {
 
       str_vec.push_back(curr_char);
       continue;
-    } else if (!std::regex_match(curr_char, std::regex(" "))) {
+    } else if (!std::regex_match(curr_char, std::regex(" ")) && !std::regex_match(curr_char, std::regex("\n"))) {
       tmp_word.append(curr_char);
       continue;
     }
