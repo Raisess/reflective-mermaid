@@ -1,27 +1,23 @@
+#include "File.h"
 #include "Lexer.h"
 
 int main(int argc, char* argv[]) {
-  std::string str = 
-    "model User {\n"
-    " id Int @db.Int @id @unique @default(autoincrement())\n"
-    " name String @db.VarChar(36)\n"
-    " role_id Int"
-    " role Role @relation(fields: [role_id], references: [id], name: \"user_role\")\n"
-    "}\n"
-    "\n"
-    "model Role {\n"
-    " id Int @db.Int @id @unique @default(autoincrement())\n"
-    " role_name String @db.VarChar(50)\n"
-    "}";
+  File* ifile = new File("./public/input.prisma");
 
-  std::cout << str << std::endl;
-  std::cout << "\n============================================\n" << std::endl;
-
-  std::vector<Token> tokens = Lexer::tokenizer(str);
+  std::string str;
+  std::vector<Token> tokens = Lexer::tokenizer(ifile->read());
 
   for (int i = 0; i < tokens.size(); i++) {
-    std::cout << i << ": (" << tokens[i].type << ") " << tokens[i].value << std::endl;
+    str.append(std::to_string(i));
+    str.append(": (");
+    str.append(tokens[i].type);
+    str.append(") ");
+    str.append(tokens[i].value);
+    str.append("\n");
   }
+
+  File* tofile = new File("./public/toutput.txt");
+  tofile->write(str);
 
   return 0;
 }
