@@ -1,10 +1,30 @@
+datasource db {
+  provider = "mysql"
+  url = env("DATABASE_URL")
+}
+
 model User {
  id Int @db.Int @id @unique @default(autoincrement())
  name String @db.VarChar(36)
- role_id Int role Role @relation(fields: [role_id], references: [id], name: "user_role")
+ status Status @default(ACTIVE)
+
+ roles Role[]
+
+ @@map("users")
 }
 
 model Role {
  id Int @db.Int @id @unique @default(autoincrement())
- role_name String @db.VarChar(50)
+ name String @db.VarChar(50)
+ description String? @db.VarChar(200)
+
+ user_id Int
+ user User @relation(fields: [user_id], references: [id])
+
+ @@map("roles")
+}
+
+enum Status {
+  ACTIVE
+  INACTIVE
 }
