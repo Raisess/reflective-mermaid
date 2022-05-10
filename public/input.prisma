@@ -1,0 +1,10 @@
+model User {
+ id Int @db.Int @id @unique @default(autoincrement())
+ name String @db.VarChar(36)
+ role_id Int role Role @relation(fields: [role_id], references: [id], name: "user_role")
+}
+
+model Role {
+ id Int @db.Int @id @unique @default(autoincrement())
+ role_name String @db.VarChar(50)
+}
