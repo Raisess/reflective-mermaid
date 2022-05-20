@@ -3,10 +3,10 @@
 #include "Parser.h"
 
 int main(int argc, char* argv[]) {
-  File* ifile = new File("./public/input.prisma");
+  File* input_file = new File("./public/input.prisma");
 
   std::string str;
-  std::vector<Token> tokens = Lexer::tokenizer(ifile->read());
+  std::vector<Token> tokens = Lexer::tokenizer(input_file->read());
 
   for (int i = 0; i < tokens.size(); i++) {
     str.append(std::to_string(i));
@@ -17,14 +17,15 @@ int main(int argc, char* argv[]) {
     str.append("\n");
   }
 
-  File* tofile = new File("./public/toutput.txt");
-  tofile->write(str);
+  File* tokenizer_output_file = new File("./public/tokenizer_output.txt");
+  tokenizer_output_file->write(str);
 
   Parser* parser = new Parser(tokens);
   std::vector<Statement> stmts = parser->parse();
 
   for (Statement stmt : stmts) {
-    std::cout << stmt.id << ": (" << stmt.type << ") " << stmt.constructor << " | value: " << stmt.value << std::endl;
+    std::cout << stmt.id << ": (" << stmt.type << ") " << stmt.constructor << std::endl;
+    //std::cout << stmt.id << ": (" << stmt.type << ") " << stmt.constructor << " | value: " << stmt.value << std::endl;
   }
 
   return 0;
