@@ -1,5 +1,6 @@
 #include "File.h"
 #include "Lexer.h"
+#include "Parser.h"
 
 int main(int argc, char* argv[]) {
   File* ifile = new File("./public/input.prisma");
@@ -18,6 +19,13 @@ int main(int argc, char* argv[]) {
 
   File* tofile = new File("./public/toutput.txt");
   tofile->write(str);
+
+  Parser* parser = new Parser(tokens);
+  std::vector<Statement> stmts = parser->parse();
+
+  for (Statement stmt : stmts) {
+    std::cout << stmt.id << ": (" << stmt.type << ") " << stmt.constructor << " | value: " << stmt.value << std::endl;
+  }
 
   return 0;
 }
