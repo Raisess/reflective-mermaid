@@ -7,7 +7,7 @@ std::vector<Token> Lexer::tokenizer(std::string str) {
   for (int i = 0; i < str_vec.size(); i++) {
     Token token;
     token.type = Lexer::match(str_vec[i]);
-    token.value = str_vec[i];
+    token.value = token.type == "EOL" ? "\\n" : str_vec[i];
 
     tokens.push_back(token);
   }
@@ -55,7 +55,7 @@ std::vector<std::string> Lexer::split_str(std::string str) {
   for (int i = 0; i < str.length(); i++) {
     std::string curr_char = str.substr(i, 1);
 
-    if (std::regex_match(curr_char, std::regex("[(){}:,?\[\\]]"))) {
+    if (std::regex_match(curr_char, std::regex("[(){}:,?\[\\]\\n\\r\n\\r]"))) {
       if (tmp_word != "") {
         str_vec.push_back(tmp_word);
         tmp_word = "";
@@ -63,7 +63,7 @@ std::vector<std::string> Lexer::split_str(std::string str) {
 
       str_vec.push_back(curr_char);
       continue;
-    } else if (!std::regex_match(curr_char, std::regex(" ")) && !std::regex_match(curr_char, std::regex("\n"))) {
+    } else if (!std::regex_match(curr_char, std::regex(" "))) {
       tmp_word.append(curr_char);
       continue;
     }
