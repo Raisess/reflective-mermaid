@@ -1,6 +1,9 @@
+#include <iostream>
 #include "File.h"
 #include "Lexer.h"
 #include "Parser.h"
+
+#define DEBUG 1
 
 int main(int argc, char* argv[]) {
   File* input_file = new File("./public/input.prisma");
@@ -17,8 +20,10 @@ int main(int argc, char* argv[]) {
     str.append("\n");
   }
 
-  File* tokenizer_output_file = new File("./public/tokenizer_output.txt");
-  tokenizer_output_file->write(str);
+  if (DEBUG) {
+    File* tokenizer_output_file = new File("./public/tokenizer_output.txt");
+    tokenizer_output_file->write(str);
+  }
 
   Parser* parser = new Parser(tokens);
   std::vector<Statement> stmts = parser->parse();
