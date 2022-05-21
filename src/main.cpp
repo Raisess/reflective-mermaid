@@ -8,19 +8,19 @@
 int main(int argc, char* argv[]) {
   File* input_file = new File("./public/input.prisma");
 
-  std::string str;
   std::vector<Token> tokens = Lexer::tokenizer(input_file->read());
 
-  for (int i = 0; i < tokens.size(); i++) {
-    str.append(std::to_string(i));
-    str.append(": (");
-    str.append(tokens[i].type);
-    str.append(") ");
-    str.append(tokens[i].value);
-    str.append("\n");
-  }
-
   if (DEBUG) {
+    std::string str;
+    for (int i = 0; i < tokens.size(); i++) {
+      str.append(std::to_string(i));
+      str.append(": (");
+      str.append(tokens[i].type);
+      str.append(") ");
+      str.append(tokens[i].value);
+      str.append("\n");
+    }
+
     File* tokenizer_output_file = new File("./public/tokenizer_output.txt");
     tokenizer_output_file->write(str);
   }
@@ -30,11 +30,11 @@ int main(int argc, char* argv[]) {
 
   for (Statement stmt : stmts) {
     std::cout << stmt.id << ": (" << stmt.type << ") " << stmt.constructor << std::endl;
+    //std::cout << stmt.id << ": (" << stmt.type << ") " << stmt.constructor << " | value: " << stmt.value << std::endl;
 
     for (PropertyStatement pstmt : stmt.properties) {
       std::cout << "---> " << pstmt.constructor << ": " << pstmt.type << std::endl;
     }
-    //std::cout << stmt.id << ": (" << stmt.type << ") " << stmt.constructor << " | value: " << stmt.value << std::endl;
   }
 
   return 0;
