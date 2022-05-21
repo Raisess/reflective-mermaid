@@ -11,6 +11,7 @@ enum ParseStep {
 };
 
 enum StatementEnum {
+  undefined_stmt = -1,
   datasource_generator_stmt = 0,
   model_stmt,
   enum_stmt,
@@ -31,4 +32,6 @@ class Parser {
 
   private:
     std::vector<Token> tokens;
+    std::vector<Statement> stmts;
+    ParseStep step = (ParseStep) 0;
 };
