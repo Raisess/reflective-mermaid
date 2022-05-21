@@ -40,7 +40,12 @@ std::vector<Statement> Parser::parse() {
         break;
       case 1:
         switch (stmt.id) {
+          // invalid statement
           case -1:
+            std::cout << "Parser error: unrecognized statement \"" << stmt.type << " " << stmt.constructor << "\"" << std::endl;
+            exit(1);
+            break;
+          // datasource and generator skip
           case 0:
             break;
           // model property statement
@@ -60,6 +65,11 @@ std::vector<Statement> Parser::parse() {
             break;
           // enum property statement
           case 2:
+            pstmt.type = "enum_property";
+            pstmt.constructor = token.value;
+            stmt.properties.push_back(pstmt);
+            pstmt = {};
+            i += 1; // skip EOL
             break;
         }
         break;
