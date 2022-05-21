@@ -11,9 +11,6 @@ std::vector<Statement> Parser::parse() {
   for (int i = 0; i < this->tokens.size(); i++) {
     Token token = this->tokens[i];
 
-    stmt.value.append(token.value);
-    stmt.value.append(" ");
-
     if (token.type == "Symbol" && (token.value == "datasource" || token.value == "generator" || token.value == "model" || token.value == "enum")) {
       this->step = (ParseStep) 0;
     } else if (token.type == "RightCurly") {

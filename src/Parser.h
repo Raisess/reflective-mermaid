@@ -26,8 +26,6 @@ typedef struct Statement {
   StatementEnum id;
   std::string type;
   std::string constructor;
-  std::string value;
-
   std::vector<PropertyStatement> properties;
 } Statement;
 
