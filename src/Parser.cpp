@@ -20,8 +20,8 @@ std::vector<Statement> Parser::parse() {
       this->step = (ParseStep) 2;
     }
 
-    // skip exit statement EOL's
-    if (this->step == 2 && token.type == "EOL") continue;
+    // skip outside statement EOL's
+    if ((this->step == 0 || this->step == 2) && token.type == "EOL") continue;
 
     switch (this->step) {
       case 0:
