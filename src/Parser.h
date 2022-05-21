@@ -6,7 +6,7 @@
 
 enum ParseStep {
   constructor_stp = 0,
-  properties_stp,
+  property_stp,
   exit_stp,
 };
 
@@ -17,11 +17,18 @@ enum StatementEnum {
   enum_stmt,
 };
 
+typedef struct PropertyStatement {
+  std::string type;
+  std::string constructor;
+} PropertyStatement;
+
 typedef struct Statement {
   StatementEnum id;
   std::string type;
   std::string constructor;
   std::string value;
+
+  std::vector<PropertyStatement> properties;
 } Statement;
 
 class Parser {

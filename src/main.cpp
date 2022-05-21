@@ -30,6 +30,10 @@ int main(int argc, char* argv[]) {
 
   for (Statement stmt : stmts) {
     std::cout << stmt.id << ": (" << stmt.type << ") " << stmt.constructor << std::endl;
+
+    for (PropertyStatement pstmt : stmt.properties) {
+      std::cout << "---> " << pstmt.constructor << ": " << pstmt.type << std::endl;
+    }
     //std::cout << stmt.id << ": (" << stmt.type << ") " << stmt.constructor << " | value: " << stmt.value << std::endl;
   }
 
