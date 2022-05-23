@@ -50,12 +50,12 @@ std::vector<Statement> Parser::parse() {
               pstmt = {};
             } else if (pstmt.constructor == "") {
               if (token.value == "@@map") {
-                i += 2;
+                i += 2; // skip to map value
                 pstmt.constructor = this->tokens[i].value;
                 pstmt.type = TTABLE_MAP;
               } else {
                 pstmt.constructor = token.value;
-                i += 1;
+                i += 1; // skip to type value
                 pstmt.type = this->tokens[i].value;
               }
             }
@@ -63,8 +63,8 @@ std::vector<Statement> Parser::parse() {
             break;
           // enum property statement
           case 2:
-            pstmt.type = TENUM_PROP;
             pstmt.constructor = token.value;
+            pstmt.type = TENUM_PROP;
             stmt.properties.push_back(pstmt);
             pstmt = {};
             i += 1; // skip EOL
