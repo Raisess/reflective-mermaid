@@ -42,5 +42,8 @@ int main(int argc, char* argv[]) {
 
   std::cout << final_output << std::endl;
 
+  File* output_file = new File("./public/output.mmd");
+  output_file->write(final_output);
+
   return 0;
 }
