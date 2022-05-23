@@ -4,6 +4,9 @@
 #include <vector>
 #include "Lexer.h"
 
+#define TTABLE_MAP "TABLE_MAPPER"
+#define TENUM_PROP "ENUM_PROPERTY"
+
 enum ParseStep {
   constructor_stp = 0,
   property_stp,
@@ -31,7 +34,9 @@ typedef struct Statement {
 
 class Parser {
   public:
-    Parser(std::vector<Token> tokens);
+    Parser(std::vector<Token> tokens) {
+      this->tokens = tokens;
+    }
 
     std::vector<Statement> parse();
 

@@ -1,9 +1,5 @@
 #include "Parser.h"
 
-Parser::Parser(std::vector<Token> tokens) {
-  this->tokens = tokens;
-}
-
 std::vector<Statement> Parser::parse() {
   Statement stmt;
   PropertyStatement pstmt;
@@ -52,17 +48,22 @@ std::vector<Statement> Parser::parse() {
             } else if (token.type == "EOL") {
               stmt.properties.push_back(pstmt);
               pstmt = {};
-              break;
             } else if (pstmt.constructor == "") {
-              pstmt.constructor = token.value;
-              break;
+              if (token.value == "@@map") {
+                i += 2;
+                pstmt.constructor = this->tokens[i].value;
+                pstmt.type = TTABLE_MAP;
+              } else {
+                pstmt.constructor = token.value;
+                i += 1;
+                pstmt.type = this->tokens[i].value;
+              }
             }
 
-            pstmt.type.append(token.value.append(","));
             break;
           // enum property statement
           case 2:
-            pstmt.type = "enum_property";
+            pstmt.type = TENUM_PROP;
             pstmt.constructor = token.value;
             stmt.properties.push_back(pstmt);
             pstmt = {};
