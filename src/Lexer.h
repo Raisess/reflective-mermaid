@@ -6,7 +6,7 @@
 
 typedef struct {
   std::string type;
-  std::string matches;
+  std::string match;
 } TokenMatcher;
 
 typedef struct {
@@ -16,9 +16,9 @@ typedef struct {
 
 class Lexer {
   public:
-    static std::vector<Token> tokenizer(std::string);
+    static std::vector<Token> tokenizer(std::string str);
 
   private:
-    static std::string match(std::string);
-    static std::vector<std::string> split_str(std::string);
+    static std::string match(std::string token);
+    static std::vector<std::string> split_str(std::string str);
 };

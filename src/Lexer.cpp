@@ -4,10 +4,10 @@ std::vector<Token> Lexer::tokenizer(std::string str) {
   std::vector<std::string> str_vec = Lexer::split_str(str);
   std::vector<Token> tokens;
 
-  for (int i = 0; i < str_vec.size(); i++) {
+  for (std::string word : str_vec) {
     Token token;
-    token.type = Lexer::match(str_vec[i]);
-    token.value = token.type == "EOL" ? "\\n" : str_vec[i];
+    token.type = Lexer::match(word);
+    token.value = token.type == "EOL" ? "\\n" : word;
 
     tokens.push_back(token);
   }
@@ -15,7 +15,7 @@ std::vector<Token> Lexer::tokenizer(std::string str) {
   return tokens;
 }
 
-std::string Lexer::match(std::string str) {
+std::string Lexer::match(std::string token) {
   std::vector<TokenMatcher> valid_matches = {
     { "EOL", "\r\n|\r|\n" },
     { "NativeType", "@db.[A-Za-z]+" },
@@ -38,13 +38,13 @@ std::string Lexer::match(std::string str) {
     { "Optinal", "[?]" },
   };
 
-  for (int i = 0; i < valid_matches.size(); i++) {
-    if (std::regex_match(str, std::regex(valid_matches[i].matches))) {
-      return valid_matches[i].type;
+  for (TokenMatcher token_match : valid_matches) {
+    if (std::regex_match(token, std::regex(token_match.match))) {
+      return token_match.type;
     }
   }
 
-  std::cout << "Error: Invalid token " << str << std::endl;
+  std::cout << "Error: Invalid token " << token << std::endl;
   exit(1);
 }
 
