@@ -1,9 +1,5 @@
 #include "File.h"
 
-File::File(std::string path) {
-  this->path = path;
-}
-
 std::string File::read() {
   this->fdata = "";
   this->rfstream.open(this->path);

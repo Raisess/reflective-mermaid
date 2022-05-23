@@ -5,7 +5,9 @@
 
 class File {
   public:
-    File(std::string path);
+    File(std::string path) {
+      this->path = path;
+    }
 
     std::string read();
     void write(std::string content);
