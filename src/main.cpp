@@ -2,6 +2,7 @@
 #include "File.h"
 #include "Lexer.h"
 #include "Parser.h"
+#include "ParserListener.h"
 
 #define DEBUG 1
 
@@ -35,6 +36,11 @@ int main(int argc, char* argv[]) {
       std::cout << "---> " << pstmt.type << ": " << pstmt.constructor << std::endl;
     }
   }
+
+  ParserListener* transpiler = new ParserListener(stmts);
+  std::string final_output = transpiler->transpile();
+
+  std::cout << final_output << std::endl;
 
   return 0;
 }

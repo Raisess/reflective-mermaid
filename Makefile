@@ -4,7 +4,8 @@ SRC_DIR=./src
 INPUT=$(SRC_DIR)/main.cpp \
 			$(SRC_DIR)/File.cpp \
 			$(SRC_DIR)/Lexer.cpp \
-			$(SRC_DIR)/Parser.cpp
+			$(SRC_DIR)/Parser.cpp \
+			$(SRC_DIR)/ParserListener.cpp
 
 BUILD_DIR=./build
 OUTPUT=$(BUILD_DIR)/refmermaid
