@@ -7,6 +7,8 @@
 #define TTABLE_MAP "TABLE_MAPPER"
 #define TENUM_PROP "ENUM_PROPERTY"
 
+namespace Syntax {
+
 enum ParseStep {
   constructor_stp = 0,
   property_stp,
@@ -45,3 +47,5 @@ class Parser {
     std::vector<Statement> stmts;
     ParseStep step = (ParseStep) 0;
 };
+
+}

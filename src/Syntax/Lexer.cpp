@@ -1,6 +1,6 @@
 #include "Lexer.h"
 
-std::vector<Token> Lexer::tokenizer(std::string str) {
+std::vector<Syntax::Token> Syntax::Lexer::tokenizer(std::string str) {
   std::vector<std::string> str_vec = Lexer::split_str(str);
   std::vector<Token> tokens;
 
@@ -15,7 +15,7 @@ std::vector<Token> Lexer::tokenizer(std::string str) {
   return tokens;
 }
 
-std::string Lexer::match(std::string token) {
+std::string Syntax::Lexer::match(std::string token) {
   std::vector<TokenMatcher> valid_matches = {
     { "EOL", EOL },
     { "Symbol", "[@A-Z._a-z?]+" },
@@ -43,7 +43,7 @@ std::string Lexer::match(std::string token) {
   exit(1);
 }
 
-std::vector<std::string> Lexer::split_str(std::string str) {
+std::vector<std::string> Syntax::Lexer::split_str(std::string str) {
   std::vector<std::string> str_vec;
   std::string tmp_word = "";
 

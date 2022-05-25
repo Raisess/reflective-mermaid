@@ -1,6 +1,6 @@
 #include "ParserListener.h"
 
-std::string ParserListener::transpile() {
+std::string Syntax::ParserListener::transpile() {
   for (Statement stmt : this->stmts) {
     switch (stmt.id) {
       case -1:
@@ -21,7 +21,7 @@ std::string ParserListener::transpile() {
   return this->ctx.str();
 }
 
-void ParserListener::enter_model_stmt(Statement stmt) {
+void Syntax::ParserListener::enter_model_stmt(Statement stmt) {
   this->ctx << "\tclass " << stmt.constructor << "_Model" << " {\n";
 
   for (PropertyStatement prop : stmt.properties) {
@@ -31,7 +31,7 @@ void ParserListener::enter_model_stmt(Statement stmt) {
   this->ctx << "\t}\n";
 }
 
-void ParserListener::enter_enum_stmt(Statement stmt) {
+void Syntax::ParserListener::enter_enum_stmt(Statement stmt) {
   this->ctx << "\tclass " << stmt.constructor << "_Enum" << " {\n";
 
   for (PropertyStatement prop : stmt.properties) {

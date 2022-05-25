@@ -1,6 +1,6 @@
 #include "Parser.h"
 
-std::vector<Statement> Parser::parse() {
+std::vector<Syntax::Statement> Syntax::Parser::parse() {
   Statement stmt;
   PropertyStatement pstmt;
 

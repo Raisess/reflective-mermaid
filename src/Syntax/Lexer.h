@@ -8,6 +8,8 @@
 #define EOL "\n"
 #define SEPARATOR "[(){}:,\[\\]\\n]"
 
+namespace Syntax {
+
 typedef struct {
   std::string type;
   std::string match;
@@ -26,3 +28,5 @@ class Lexer {
     static std::string match(std::string token);
     static std::vector<std::string> split_str(std::string str);
 };
+
+}

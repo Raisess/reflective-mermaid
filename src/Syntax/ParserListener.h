@@ -3,6 +3,8 @@
 #include <vector>
 #include "Parser.h"
 
+namespace Syntax {
+
 class ParserListener {
   public:
     ParserListener(std::vector<Statement> stmts) {
@@ -19,3 +21,5 @@ class ParserListener {
     void enter_model_stmt(Statement stmt);
     void enter_enum_stmt(Statement stmt);
 };
+
+}
