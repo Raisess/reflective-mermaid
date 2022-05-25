@@ -1,4 +1,5 @@
 #include <iostream>
+#include <sstream>
 #include "Utils/File.h"
 #include "Syntax/Lexer.h"
 #include "Syntax/Parser.h"

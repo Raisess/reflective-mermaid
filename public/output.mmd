@@ -1,12 +1,12 @@
 classDiagram
-	class User_Model {
+	class User {
 		Int id
 		String name
 		Status status
 		Role[] roles
 		TABLE_MAPPER "users"
 	}
-	class Role_Model {
+	class Role {
 		Int id
 		String name
 		String? description
@@ -14,7 +14,7 @@ classDiagram
 		User user
 		TABLE_MAPPER "roles"
 	}
-	class Status_Enum {
+	class Status {
 		ACTIVE
 		INACTIVE
 	}
