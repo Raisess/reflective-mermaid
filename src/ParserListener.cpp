@@ -22,7 +22,7 @@ std::string ParserListener::transpile() {
 }
 
 void ParserListener::enter_model_stmt(Statement stmt) {
-  this->ctx << "\tclass " << stmt.constructor << " {\n";
+  this->ctx << "\tclass " << stmt.constructor << "_Model" << " {\n";
 
   for (PropertyStatement prop : stmt.properties) {
     this->ctx << "\t\t" << prop.type << " " << prop.constructor << "\n";
