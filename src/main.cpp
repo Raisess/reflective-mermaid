@@ -1,32 +1,23 @@
 #include <iostream>
-#include "File.h"
+#include "Utils/File.h"
 #include "Lexer.h"
 #include "Parser.h"
 #include "ParserListener.h"
 
-#define DEBUG 1
-
 int main(int argc, char* argv[]) {
-  File* input_file = new File("./public/input.prisma");
+  auto* input_file = new Utils::File("./public/input.prisma");
 
   std::vector<Token> tokens = Lexer::tokenizer(input_file->read());
 
-  if (DEBUG) {
-    std::string str;
-    for (int i = 0; i < tokens.size(); i++) {
-      str.append(std::to_string(i));
-      str.append(": (");
-      str.append(tokens[i].type);
-      str.append(") ");
-      str.append(tokens[i].value);
-      str.append("\n");
-    }
-
-    File* tokenizer_output_file = new File("./public/tokenizer_output.txt");
-    tokenizer_output_file->write(str);
+  std::ostringstream ostr;
+  for (int i = 0; i < tokens.size(); i++) {
+    ostr << i << ": (" << tokens[i].type << ") " << tokens[i].value << "\n";
   }
 
-  Parser* parser = new Parser(tokens);
+  auto* tokenizer_output_file = new Utils::File("./public/tokenizer_output.txt");
+  tokenizer_output_file->write(ostr.str());
+
+  auto* parser = new Parser(tokens);
   std::vector<Statement> stmts = parser->parse();
 
   for (Statement stmt : stmts) {
@@ -37,13 +28,13 @@ int main(int argc, char* argv[]) {
     }
   }
 
-  ParserListener* transpiler = new ParserListener(stmts);
+  auto* transpiler = new ParserListener(stmts);
   std::string final_output = transpiler->transpile();
 
-  std::cout << final_output << std::endl;
-
-  File* output_file = new File("./public/output.mmd");
+  auto* output_file = new Utils::File("./public/output.mmd");
   output_file->write(final_output);
+
+  std::cout << final_output << std::endl;
 
   return 0;
 }

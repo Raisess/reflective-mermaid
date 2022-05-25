@@ -3,6 +3,8 @@
 #include <fstream>
 #include <iostream>
 
+namespace Utils {
+
 class File {
   public:
     File(std::string path) {
@@ -18,3 +20,5 @@ class File {
     std::ifstream rfstream;
     std::ofstream wfstream;
 };
+
+}

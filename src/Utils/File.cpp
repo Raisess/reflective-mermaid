@@ -1,6 +1,6 @@
 #include "File.h"
 
-std::string File::read() {
+std::string Utils::File::read() {
   this->fdata = "";
   this->rfstream.open(this->path);
 
@@ -15,7 +15,7 @@ std::string File::read() {
   return this->fdata;
 }
 
-void File::write(std::string data) {
+void Utils::File::write(std::string data) {
   this->wfstream.open(this->path);
   this->wfstream << data << std::endl;
   this->wfstream.close();
