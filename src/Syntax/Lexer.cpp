@@ -1,4 +1,5 @@
 #include "Lexer.h"
+#include "../Utils/Error.h"
 
 std::vector<Syntax::Token> Syntax::Lexer::tokenizer(std::string str) {
   std::vector<std::string> str_vec = Lexer::split_str(str);
@@ -39,8 +40,7 @@ std::string Syntax::Lexer::match(std::string token) {
     }
   }
 
-  std::cout << "Error: Invalid token " << token << std::endl;
-  exit(1);
+  throw new Utils::Error({ "Invalid token ", token });
 }
 
 std::vector<std::string> Syntax::Lexer::split_str(std::string str) {

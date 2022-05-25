@@ -1,4 +1,5 @@
 #include "Parser.h"
+#include "../Utils/Error.h"
 
 std::vector<Syntax::Statement> Syntax::Parser::parse() {
   Statement stmt;
@@ -35,9 +36,7 @@ std::vector<Syntax::Statement> Syntax::Parser::parse() {
         switch (stmt.id) {
           // invalid statement
           case -1:
-            std::cout << "Parser error: unrecognized statement \"" << stmt.type << " " << stmt.constructor << "\"" << std::endl;
-            exit(1);
-            break;
+            throw new Utils::Error({ "Unrecognized statement ", stmt.type, " ", stmt.constructor });
           // datasource and generator skip
           case 0:
             break;
