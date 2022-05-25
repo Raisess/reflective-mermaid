@@ -36,8 +36,8 @@ std::vector<Syntax::Statement> Syntax::Parser::parse() {
         switch (stmt.id) {
           // invalid statement
           case -1:
-            throw new Utils::Error({ "Unrecognized statement ", stmt.type, " ", stmt.constructor });
-          // datasource and generator skip
+            throw new Utils::Error({ "unrecognized statement ", stmt.type, " ", stmt.constructor });
+          // skip datasource and generator
           case 0:
             break;
           // model property statement

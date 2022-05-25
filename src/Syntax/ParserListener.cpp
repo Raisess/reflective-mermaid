@@ -1,9 +1,11 @@
 #include "ParserListener.h"
+#include "../Utils/Error.h"
 
 std::string Syntax::ParserListener::transpile() {
   for (Statement stmt : this->stmts) {
     switch (stmt.id) {
       case -1:
+        throw new Utils::Error({ "Invalid statement ", stmt.type});
       case 0:
         break;
       case 1:
@@ -12,9 +14,6 @@ std::string Syntax::ParserListener::transpile() {
       case 2:
         this->enter_enum_stmt(stmt);
         break;
-      default:
-        std::cout << "Error: Invalid statement" << stmt.type << std::endl;
-        exit(1);
     }
   }
 
