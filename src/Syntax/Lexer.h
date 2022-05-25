@@ -6,7 +6,7 @@
 
 #define BLANK_SPACE " |\t"
 #define EOL "\n"
-#define SEPARATOR "[(){}:,\[\\]\\n]"
+#define SEPARATOR "[(){}:,\\n]"
 
 namespace Syntax {
 

@@ -19,7 +19,7 @@ std::vector<Syntax::Token> Syntax::Lexer::tokenizer(std::string str) {
 std::string Syntax::Lexer::match(std::string token) {
   std::vector<TokenMatcher> valid_matches = {
     { "EOL", EOL },
-    { "Symbol", "[@A-Z._a-z?]+" },
+    { "Symbol", "[@A-Z._a-z?\[\\]]+" },
     { "Number", "\\d+" },
     { "String", "'(.*?)'" },
     { "String", "\"(.*?)\"" },
@@ -30,8 +30,6 @@ std::string Syntax::Lexer::match(std::string token) {
     { "RightBrace", "[}]" },
     { "LeftParens", "[(]" },
     { "RightParens", "[)]" },
-    { "LeftSquare", "[\[]" },
-    { "RightSquare", "[\\]]" },
   };
 
   for (TokenMatcher token_match : valid_matches) {
