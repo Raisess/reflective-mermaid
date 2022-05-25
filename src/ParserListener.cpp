@@ -23,10 +23,20 @@ std::string ParserListener::transpile() {
 
 void ParserListener::enter_model_stmt(Statement stmt) {
   this->ctx << "\tclass " << stmt.constructor << " {\n";
+
+  for (PropertyStatement prop : stmt.properties) {
+    this->ctx << "\t\t" << prop.type << " " << prop.constructor << "\n";
+  }
+
   this->ctx << "\t}\n";
 }
 
 void ParserListener::enter_enum_stmt(Statement stmt) {
   this->ctx << "\tclass " << stmt.constructor << "_Enum" << " {\n";
+
+  for (PropertyStatement prop : stmt.properties) {
+    this->ctx << "\t\t" << prop.constructor << "\n";
+  }
+
   this->ctx << "\t}\n";
 }
