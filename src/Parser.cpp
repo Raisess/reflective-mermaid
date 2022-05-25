@@ -9,7 +9,7 @@ std::vector<Statement> Parser::parse() {
 
     if (token.type == "Symbol" && (token.value == "datasource" || token.value == "generator" || token.value == "model" || token.value == "enum")) {
       this->step = (ParseStep) 0;
-    } else if (token.type == "RightCurly") {
+    } else if (token.type == "RightBrace") {
       this->step = (ParseStep) 2;
     }
 
