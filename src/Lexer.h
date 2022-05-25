@@ -4,6 +4,10 @@
 #include <regex>
 #include <vector>
 
+#define BLANK_SPACE " |\t"
+#define EOL "\n"
+#define SEPARATOR "[(){}:,\[\\]\\n]"
+
 typedef struct {
   std::string type;
   std::string match;

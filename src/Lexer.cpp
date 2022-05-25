@@ -17,25 +17,20 @@ std::vector<Token> Lexer::tokenizer(std::string str) {
 
 std::string Lexer::match(std::string token) {
   std::vector<TokenMatcher> valid_matches = {
-    { "EOL", "\r\n|\r|\n" },
-    { "NativeType", "@db.[A-Za-z]+" },
-    { "InlineFlag", "@[a-z]+" },
-    { "Flag", "@@[a-z]+" },
-    { "Symbol", "[A-Za-z]+" },
-    { "Symbol", "[A-Za-z]+_[A-Za-z]+" },
+    { "EOL", EOL },
+    { "Symbol", "[@A-Z._a-z?]+" },
     { "Number", "\\d+" },
     { "String", "'(.*?)'" },
     { "String", "\"(.*?)\"" },
     { "Operator", "[-+*/=]" },
-    { "TwoPoints", "[:]" },
-    { "LeftCurly", "[{]" },
-    { "RightCurly", "[}]" },
-    { "LeftParen", "[(]" },
-    { "RightParen", "[)]" },
+    { "Colon", "[:]" },
+    { "Comma", "[,]" },
+    { "LeftBrace", "[{]" },
+    { "RightBrace", "[}]" },
+    { "LeftParens", "[(]" },
+    { "RightParens", "[)]" },
     { "LeftSquare", "[\[]" },
     { "RightSquare", "[\\]]" },
-    { "Comma", "[,]" },
-    { "Optinal", "[?]" },
   };
 
   for (TokenMatcher token_match : valid_matches) {
@@ -55,7 +50,7 @@ std::vector<std::string> Lexer::split_str(std::string str) {
   for (int i = 0; i < str.length(); i++) {
     std::string curr_char = str.substr(i, 1);
 
-    if (std::regex_match(curr_char, std::regex("[(){}:,?\[\\]\\n\\r\n\\r]"))) {
+    if (std::regex_match(curr_char, std::regex(SEPARATOR))) {
       if (tmp_word != "") {
         str_vec.push_back(tmp_word);
         tmp_word = "";
@@ -63,7 +58,7 @@ std::vector<std::string> Lexer::split_str(std::string str) {
 
       str_vec.push_back(curr_char);
       continue;
-    } else if (!std::regex_match(curr_char, std::regex(" "))) {
+    } else if (!std::regex_match(curr_char, std::regex(BLANK_SPACE))) {
       tmp_word.append(curr_char);
       continue;
     }
