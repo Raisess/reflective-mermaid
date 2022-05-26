@@ -5,6 +5,7 @@ INPUT=$(SRC_DIR)/main.cpp \
 			$(SRC_DIR)/Syntax/Lexer.cpp \
 			$(SRC_DIR)/Syntax/Parser.cpp \
 			$(SRC_DIR)/Syntax/ParserListener.cpp \
+			$(SRC_DIR)/Common/LinkedList.cpp \
 			$(SRC_DIR)/Utils/File.cpp
 
 BUILD_DIR=./build
