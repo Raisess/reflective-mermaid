@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <regex>
-#include <vector>
+#include "../Common/LinkedList.h"
 
 #define BLANK_SPACE " |\t"
 #define EOL "\n"
@@ -22,11 +22,11 @@ typedef struct {
 
 class Lexer {
   public:
-    static std::vector<Token> tokenizer(std::string str);
+    static Common::LinkedList<Token>* tokenizer(std::string str);
 
   private:
     static std::string match(std::string token);
-    static std::vector<std::string> split_str(std::string str);
+    static Common::LinkedList<std::string>* split_str(std::string str);
 };
 
 }

@@ -1,19 +1,19 @@
+#include <vector>
 #include "Lexer.h"
 #include "../Utils/Error.h"
 
-std::vector<Syntax::Token> Syntax::Lexer::tokenizer(std::string str) {
-  std::vector<std::string> str_vec = Lexer::split_str(str);
-  std::vector<Token> tokens;
+Common::LinkedList<Syntax::Token>* Syntax::Lexer::tokenizer(std::string str) {
+  Common::LinkedList<Token>* token_list = new Common::LinkedList<Token>();
+  Common::LinkedList<std::string>* str_list = Lexer::split_str(str);
 
-  for (std::string word : str_vec) {
+  str_list->for_each([&](std::string tmp_str) {
     Token token;
-    token.type = Lexer::match(word);
-    token.value = token.type == "EOL" ? "\\n" : word;
+    token.type = Lexer::match(tmp_str);
+    token.value = token.type == "EOL" ? "\\n" : tmp_str;
+    token_list->create_node(token);
+  });
 
-    tokens.push_back(token);
-  }
-
-  return tokens;
+  return token_list;
 }
 
 std::string Syntax::Lexer::match(std::string token) {
@@ -41,8 +41,8 @@ std::string Syntax::Lexer::match(std::string token) {
   throw new Utils::Error({ "Invalid token ", token });
 }
 
-std::vector<std::string> Syntax::Lexer::split_str(std::string str) {
-  std::vector<std::string> str_vec;
+Common::LinkedList<std::string>* Syntax::Lexer::split_str(std::string str) {
+  Common::LinkedList<std::string>* str_list = new Common::LinkedList<std::string>();
   std::string tmp_word = "";
 
   for (int i = 0; i < str.length(); i++) {
@@ -50,11 +50,11 @@ std::vector<std::string> Syntax::Lexer::split_str(std::string str) {
 
     if (std::regex_match(curr_char, std::regex(SEPARATOR))) {
       if (tmp_word != "") {
-        str_vec.push_back(tmp_word);
+        str_list->create_node(tmp_word);
         tmp_word = "";
       }
 
-      str_vec.push_back(curr_char);
+      str_list->create_node(curr_char);
       continue;
     } else if (!std::regex_match(curr_char, std::regex(BLANK_SPACE))) {
       tmp_word.append(curr_char);
@@ -62,10 +62,10 @@ std::vector<std::string> Syntax::Lexer::split_str(std::string str) {
     }
 
     if (tmp_word != "") {
-      str_vec.push_back(tmp_word);
+      str_list->create_node(tmp_word);
       tmp_word = "";
     }
   }
 
-  return str_vec;
+  return str_list;
 }
