@@ -24,7 +24,7 @@ void Common::LinkedList<T>::create_node(T data) {
 }
 
 template<typename T>
-void Common::LinkedList<T>::for_each(std::function<void(T)> callback) {
+void Common::LinkedList<T>::iterate(std::function<void(T)> callback) {
   Node<T>* tmp = this->head;
 
   while (tmp != NULL) {

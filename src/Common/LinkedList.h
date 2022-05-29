@@ -22,7 +22,7 @@ class LinkedList {
     Node<T>* head = NULL;
 
     void create_node(T data);
-    void for_each(std::function<void(T)> callback);
+    void iterate(std::function<void(T)> callback);
 };
 
 }

@@ -6,7 +6,7 @@ Common::LinkedList<Syntax::Token>* Syntax::Lexer::tokenizer(std::string str) {
   Common::LinkedList<Token>* token_list = new Common::LinkedList<Token>();
   Common::LinkedList<std::string>* str_list = Lexer::split_str(str);
 
-  str_list->for_each([&](std::string tmp_str) {
+  str_list->iterate([&](std::string tmp_str) {
     Token token;
     token.type = Lexer::match(tmp_str);
     token.value = token.type == "EOL" ? "\\n" : tmp_str;
