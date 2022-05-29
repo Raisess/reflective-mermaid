@@ -13,13 +13,17 @@ Common::LinkedList<Syntax::Token>* Syntax::Lexer::tokenizer(std::string str) {
     token_list->create_node(token);
   });
 
+  delete str_list;
   return token_list;
 }
 
 std::string Syntax::Lexer::match(std::string token) {
   std::vector<TokenMatcher> valid_matches = {
     { "EOL", EOL },
-    { "Symbol", "[@A-Z._a-z?\[\\]]+" },
+    { "Symbol", "[A-Z_a-z?\[\\]]+" },
+    { "NativeType", "@db.[A-Za-z]+" },
+    { "Flag", "@[a-z]+" },
+    { "Functor", "@@[a-z]+" },
     { "Number", "\\d+" },
     { "String", "'(.*?)'" },
     { "String", "\"(.*?)\"" },

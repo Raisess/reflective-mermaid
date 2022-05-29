@@ -4,7 +4,7 @@ classDiagram
 		String name
 		Status status
 		Role[] roles
-		TABLE_MAPPER "users"
+		@@map "users"
 	}
 	class Role {
 		Int id
@@ -12,7 +12,7 @@ classDiagram
 		String? description
 		Int user_id
 		User user
-		TABLE_MAPPER "roles"
+		@@map "roles"
 	}
 	class Status {
 		ACTIVE
